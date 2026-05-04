@@ -1,15 +1,18 @@
 #pragma once
 #include <map>
+#include <vector>       // ADDED: needed for vector<string>
 #include <string>
+#include <functional>   // ADDED: needed for greater<int>
 
 class Leaderboard {
 private:
-    // Binary Search Tree (BST) sorting scores in descending order
-    std::map<int, std::string, std::greater<int>> scores;
+    // std::map is a BST — sorted descending by score (greater<int>)
+    // vector<string> handles duplicate scores without overwriting
+    std::map<int, std::vector<std::string>, std::greater<int>> scores; // FIXED: was map<int, string>
 
 public:
     void addScore(std::string name, int score);
-    void displayTop10() const; // Display top 10 players
+    void displayTop10() const;
     void saveToFile(std::string filename) const;
     void loadFromFile(std::string filename);
 };

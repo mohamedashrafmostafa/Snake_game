@@ -1,8 +1,9 @@
 #pragma once
 #include "Position.h"
 
-// Store moves to use Stack for the Undo feature
+// Stores one game tick's state so the Stack can undo it
 struct Move {
-    Position previousTail; // Previous tail position to restore it
-    bool ateFood;          // Whether food was eaten in this move
+    Position previousTail;       // Tail position before this move (to restore on undo)
+    Position previousDirection;  // ADDED: direction before this move (to restore on undo)
+    bool ateFood;                // Whether food was eaten in this move
 };
