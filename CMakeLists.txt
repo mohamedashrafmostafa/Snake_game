@@ -3,22 +3,25 @@ project(PRJ)
 
 set(CMAKE_CXX_STANDARD 20)
 
-add_executable(PRJ main.cpp
-        Snake.h
-        Postion.h
-        Game.cpp
-        Snake.cpp
-        Game.h
-        Board.cpp
-        Board.h
-        Food.cpp
-        Food.h
-        Leaderboard.cpp
-        Leaderboard.h
-        PowerUp.h
-        PowerUp.cpp
-        InputHandler.h
-        InputHandler.cpp
-        Utils.cpp
-        Utils.h
-        Move.h)
+add_executable(PRJ
+        Core/main.cpp
+        Core/Snake.h
+        Core/Snake.cpp
+        Core/Position.h
+        Core/Game.h
+        Core/Game.cpp
+        Core/Board.h
+        Core/Board.cpp
+        Core/Food.h
+        Core/Food.cpp
+        Core/Leaderboard.h
+        Core/Leaderboard.cpp
+        Core/PowerUp.h
+        Core/PowerUp.cpp
+        Core/InputHandler.h
+        Core/InputHandler.cpp
+        Core/Utils.h
+        Core/Utils.cpp
+        Core/Move.h
+
+)
