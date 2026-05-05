@@ -1,7 +1,7 @@
 # 🐍 Snake++ 
 
 **Course:** CSE333 - Data Structures and Algorithms
-**Semester:** Spring 2026[cite: 1]  
+**Semester:** Spring 2026
 **Department:** Computer and Systems Engineering Department
 **Institution:** Ain Shams University - Faculty of Engineering, Specialized Programs
 
