@@ -1,12 +1,31 @@
 cmake_minimum_required(VERSION 4.1)
-project(Snake_game)
+project(PRJ)
 
-set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD 20)
 
-include_directories(Core)
+add_executable(PRJ
+        Core/main.cpp
+        Core/Snake.h
+        Core/Snake.cpp
+        Core/Position.h
+        Core/Game.h
+        Core/Game.cpp
+        Core/Board.h
+        Core/Board.cpp
+        Core/Food.h
+        Core/Food.cpp
+        Core/Leaderboard.h
+        Core/Leaderboard.cpp
+        Core/PowerUp.h
+        Core/PowerUp.cpp
+        Core/InputHandler.h
+        Core/InputHandler.cpp
+        Core/Utils.h
+        Core/Utils.cpp
+        Core/Move.h
+        Core/Postion.h
+        Core/Move.cpp
+        Core/Postion.cpp
 
-add_executable(Snake_game
-        Core/snake.cpp
-        Core/snake.h
-        GUI/Mainwindow.cpp
-        GUI/Mainwindow.h)
+
+)
