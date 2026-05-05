@@ -1,37 +1,65 @@
 #pragma once
-#include <queue>
+#include <vector>   // explicit — needed for std::vector<PowerUp>
 #include <stack>
 #include <string>
+#include <unordered_set>
 #include "Snake.h"
 #include "Board.h"
-#include "Food.h"         // ADDED: was missing entirely
+#include "Food.h"
 #include "Leaderboard.h"
 #include "PowerUp.h"
 #include "Move.h"
+#include "Position.h"
 
 class Game {
 private:
-    Snake snake;
-    Board board;
+    // ── Core components ──────────────────────────
+    Snake       snake;
+    Board       board;
     Leaderboard leaderboard;
+    Food        food;
 
-    Food food;                                    // FIXED: was "Position food"
-    std::priority_queue<PowerUp> activePowerUps;  // Power-ups management
-    std::stack<Move> moveHistory;                 // Move history for undo feature
+    // ── Data structures ──────────────────────────
+    std::vector<PowerUp> activePowerUps;   // vector so we can iterate + erase easily
+    std::stack<Move>     moveHistory;      // Stack for undo feature
 
-    int score;
-    int currentLevel;
+    // ── Direction (Snake::setDirection is commented out by Member 1) ──
+    // We track direction here until Member 1 uncomments setDirection/getDirection
+    Position currentDirection;
+
+    // ── Game state ───────────────────────────────
+    int  score;
+    int  currentLevel;
     bool gameOver;
+    bool paused;
+
+    // ── Power-up state ───────────────────────────
+    int  tickMs;
+    int  scoreMultiplier;
+    bool invincible;
+    int  powerUpTicksLeft;
+
+    // ── Internal flags ────────────────────────────
+    bool lastMoveAteFood;
+    int  lastEarnedPoints;   // exact points earned this tick (used by undo)
+
+    // ── Private helpers ──────────────────────────
+    void showMenu();
+    void resetGame();
+    void showGameOver();
+    void  displayHUD() const;
+    void tickPowerUps();
+    void spawnPowerUp();     // ADDED: was missing — spawns a power-up on the board
 
 public:
     Game();
-    void start();                    // Start the game and show menu
-    void update();                   // Main game loop
-    void handleInput();              // Handle player input
+    void start();
+    void update();
+    void handleInput();
 
-    void spawnFood();                // Spawn food in an empty spot using Hash Set
-    void checkCollisions();          // Check all types of collisions
+    void spawnFood();
+    void checkCollisions();
     void applyPowerUp(PowerUpType type);
-    void undoLastMove();             // Undo feature using Stack
+    void undoLastMove();
     void saveCurrentScore(std::string playerName);
 };

@@ -1,7 +1,7 @@
 #pragma once
 #include "Position.h"
 
-enum PowerUpType { SPEED_UP, INVINCIBILITY, SCORE_MULTIPLIER };
+enum PowerUpType { P_SPEED_UP, INVINCIBILITY, SCORE_MULTIPLIER };
 
 struct PowerUp {
     Position pos;

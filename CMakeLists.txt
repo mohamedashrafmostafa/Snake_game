@@ -23,5 +23,9 @@ add_executable(PRJ
         Core/Utils.h
         Core/Utils.cpp
         Core/Move.h
+        Core/Postion.h
+        Core/Move.cpp
+        Core/Postion.cpp
+
 
 )
