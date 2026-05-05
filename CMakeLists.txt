@@ -26,6 +26,9 @@ add_executable(PRJ
         Core/Postion.h
         Core/Move.cpp
         Core/Postion.cpp
+        GUI/Mainwindow.cpp
+        GUI/Mainwindow.h
+        GUI/Mainwindow.ui
 
 
 )
