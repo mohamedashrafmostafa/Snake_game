@@ -15,7 +15,10 @@ find_package(Qt6 COMPONENTS Widgets REQUIRED)
 # ─── EXECUTABLE CONFIGURATION ─────────────────────────────────────
 # This MUST come before target_link_libraries!
 add_executable(SnakePlusPlus
+        # The Main
         main.cpp
+
+        # The core files
         Core/Board.cpp
         Core/Board.h
         Core/Food.cpp
@@ -35,9 +38,13 @@ add_executable(SnakePlusPlus
         Core/snake.h
         Core/Utils.cpp
         Core/Utils.h
+
+        #GUI Files
         GUI/Mainwindow.cpp
         GUI/Mainwindow.h
         GUI/mainwindow.ui
+        GUI/resources.qrc
+        icon.rc
 )
 
 
