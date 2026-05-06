@@ -32,7 +32,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->btnPause->setFocusPolicy(Qt::NoFocus);
     ui->btnMenuFromGame->setFocusPolicy(Qt::NoFocus);
 
-    this->setFocusPolicy(Qt::StrongFocus);
+    this->setFocusPolicy(Qt::StrongFocus);    
 }
 
 MainWindow::~MainWindow() {
@@ -47,7 +47,7 @@ void MainWindow::setupBoardUI() {
     
     QVBoxLayout *layout = new QVBoxLayout(ui->gameCanvas);
     layout->setContentsMargins(0, 0, 0, 0);
-    layout->addWidget(m_boardWidget);
+    layout->addWidget(m_boardWidget);    
 }
 
 void MainWindow::setupStyles() {

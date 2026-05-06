@@ -20,27 +20,59 @@
    <string>Snake++</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <layout class="QVBoxLayout" name="centralLayout">
-    <property name="spacing">
-     <number>0</number>
-    </property>
-    <property name="margin" stdset="0">
-     <number>0</number>
-    </property>
+   <layout class="QVBoxLayout" name="verticalLayout_4">
     <item>
      <widget class="QStackedWidget" name="stackedWidget">
       <property name="currentIndex">
        <number>2</number>
       </property>
       <widget class="QWidget" name="pagMenu">
-       <layout class="QVBoxLayout" name="menuLayout">
-        <property name="spacing">
-         <number>18</number>
-        </property>
+       <layout class="QVBoxLayout" name="verticalLayout_3">
         <item>
          <widget class="QLabel" name="lblTitle">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="font">
+           <font>
+            <family>Segoe UI</family>
+            <pointsize>72</pointsize>
+            <italic>false</italic>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">font: 700 72pt &quot;Segoe UI&quot;;
+
+color: rgb(255, 33, 244);
+
+background : qlineargradient(spread:pad, x1:0, y1:1, x2:0, y2:0, 
+stop:0 rgba(0, 0, 0, 255), 
+stop:0.05 rgba(14, 8, 73, 255), 
+stop:0.36 rgba(28, 17, 145, 255), 
+stop:0.6 rgba(126, 14, 81, 255), 
+stop:0.75 rgba(234, 11, 11, 255), 
+stop:0.79 rgba(244, 70, 5, 255), 
+stop:0.86 rgba(255, 136, 0, 255), 
+stop:0.935 rgba(239, 236, 55, 255))</string>
+          </property>
+          <property name="frameShape">
+           <enum>QFrame::Shape::Box</enum>
+          </property>
+          <property name="frameShadow">
+           <enum>QFrame::Shadow::Sunken</enum>
+          </property>
           <property name="text">
-           <string>🐍 Snake Game</string>
+           <string>🐍 Snake++</string>
+          </property>
+          <property name="textFormat">
+           <enum>Qt::TextFormat::AutoText</enum>
+          </property>
+          <property name="scaledContents">
+           <bool>true</bool>
           </property>
           <property name="alignment">
            <set>Qt::AlignmentFlag::AlignCenter</set>
@@ -58,48 +90,77 @@
          </widget>
         </item>
         <item>
-         <spacer>
-          <property name="orientation">
-           <enum>Qt::Orientation::Vertical</enum>
+         <widget class="QLabel" name="lblName">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
           </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>20</width>
-            <height>20</height>
-           </size>
+          <property name="font">
+           <font>
+            <family>Times New Roman</family>
+            <pointsize>28</pointsize>
+            <italic>false</italic>
+            <bold>true</bold>
+           </font>
           </property>
-         </spacer>
+          <property name="styleSheet">
+           <string notr="true">color: rgb(68, 197, 160);
+font: 700 &quot;Times New Roman&quot;;
+font: 28pt;
+font: 700 28pt &quot;Times New Roman&quot;;</string>
+          </property>
+          <property name="text">
+           <string>Player Name</string>
+          </property>
+          <property name="scaledContents">
+           <bool>true</bool>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignmentFlag::AlignCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLineEdit" name="inputPlayerName">
+          <property name="maxLength">
+           <number>20</number>
+          </property>
+          <property name="placeholderText">
+           <string>Enter your name...</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="lblDifficulty">
+          <property name="font">
+           <font>
+            <family>Times New Roman</family>
+            <pointsize>28</pointsize>
+            <italic>false</italic>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">color: rgb(68, 197, 160);
+font: 700 &quot;Times New Roman&quot;;
+font: 28pt;
+font: 700 28pt &quot;Times New Roman&quot;;</string>
+          </property>
+          <property name="text">
+           <string>Difficulty</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignmentFlag::AlignBottom|Qt::AlignmentFlag::AlignHCenter</set>
+          </property>
+         </widget>
         </item>
         <item>
          <layout class="QHBoxLayout">
-          <item>
-           <widget class="QLabel" name="lblName">
-            <property name="text">
-             <string>Player Name</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QLineEdit" name="inputPlayerName">
-            <property name="maxLength">
-             <number>20</number>
-            </property>
-            <property name="placeholderText">
-             <string>Enter your name...</string>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </item>
-        <item>
-         <layout class="QHBoxLayout">
-          <item>
-           <widget class="QLabel" name="lblDifficulty">
-            <property name="text">
-             <string>Difficulty</string>
-            </property>
-           </widget>
-          </item>
+          <property name="sizeConstraint">
+           <enum>QLayout::SizeConstraint::SetDefaultConstraint</enum>
+          </property>
           <item>
            <widget class="QComboBox" name="comboDifficulty">
             <item>
@@ -127,14 +188,31 @@
          </layout>
         </item>
         <item>
+         <widget class="QLabel" name="lblMode">
+          <property name="font">
+           <font>
+            <family>Times New Roman</family>
+            <pointsize>28</pointsize>
+            <italic>false</italic>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">color: rgb(68, 197, 160);
+font: 700 &quot;Times New Roman&quot;;
+font: 28pt;
+font: 700 28pt &quot;Times New Roman&quot;;</string>
+          </property>
+          <property name="text">
+           <string>Game Mode</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignmentFlag::AlignCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item>
          <layout class="QHBoxLayout">
-          <item>
-           <widget class="QLabel" name="lblMode">
-            <property name="text">
-             <string>Game Mode</string>
-            </property>
-           </widget>
-          </item>
           <item>
            <widget class="QComboBox" name="comboMode">
             <item>
@@ -157,13 +235,44 @@
          </layout>
         </item>
         <item>
+         <widget class="QLabel" name="lblWrap">
+          <property name="font">
+           <font>
+            <family>Times New Roman</family>
+            <pointsize>28</pointsize>
+            <italic>false</italic>
+            <bold>true</bold>
+            <underline>false</underline>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">color: rgb(68, 197, 160);
+font: 700 &quot;Times New Roman&quot;;
+font: 28pt;
+font: 700 28pt &quot;Times New Roman&quot;;</string>
+          </property>
+          <property name="text">
+           <string>Wall Wrap</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignmentFlag::AlignCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item>
          <layout class="QHBoxLayout">
           <item>
-           <widget class="QLabel" name="lblWrap">
-            <property name="text">
-             <string>Wall Wrap</string>
+           <spacer name="horizontalSpacer_2">
+            <property name="orientation">
+             <enum>Qt::Orientation::Horizontal</enum>
             </property>
-           </widget>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
           </item>
           <item>
            <widget class="QCheckBox" name="chkWallWrap">
@@ -186,19 +295,6 @@
            </spacer>
           </item>
          </layout>
-        </item>
-        <item>
-         <spacer>
-          <property name="orientation">
-           <enum>Qt::Orientation::Vertical</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>20</width>
-            <height>20</height>
-           </size>
-          </property>
-         </spacer>
         </item>
         <item>
          <widget class="QLabel" name="lblBoardSize">
@@ -458,10 +554,7 @@
        </layout>
       </widget>
       <widget class="QWidget" name="pagGameOver">
-       <layout class="QVBoxLayout" name="gameOverLayout">
-        <property name="spacing">
-         <number>16</number>
-        </property>
+       <layout class="QVBoxLayout" name="verticalLayout">
         <item>
          <widget class="QLabel" name="lblGameOver">
           <property name="text">
@@ -582,6 +675,18 @@
         </item>
         <item>
          <widget class="QTableWidget" name="tableLeaderboard">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+            <horstretch>100</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>16777215</width>
+            <height>376</height>
+           </size>
+          </property>
           <property name="editTriggers">
            <set>QAbstractItemView::EditTrigger::NoEditTriggers</set>
           </property>
@@ -591,6 +696,27 @@
           <property name="selectionMode">
            <enum>QAbstractItemView::SelectionMode::NoSelection</enum>
           </property>
+          <attribute name="horizontalHeaderCascadingSectionResizes">
+           <bool>false</bool>
+          </attribute>
+          <attribute name="horizontalHeaderHighlightSections">
+           <bool>true</bool>
+          </attribute>
+          <attribute name="horizontalHeaderShowSortIndicator" stdset="0">
+           <bool>true</bool>
+          </attribute>
+          <attribute name="horizontalHeaderStretchLastSection">
+           <bool>true</bool>
+          </attribute>
+          <attribute name="verticalHeaderVisible">
+           <bool>true</bool>
+          </attribute>
+          <attribute name="verticalHeaderShowSortIndicator" stdset="0">
+           <bool>false</bool>
+          </attribute>
+          <attribute name="verticalHeaderStretchLastSection">
+           <bool>false</bool>
+          </attribute>
           <column>
            <property name="text">
             <string>Rank</string>
@@ -604,11 +730,6 @@
           <column>
            <property name="text">
             <string>Score</string>
-           </property>
-          </column>
-          <column>
-           <property name="text">
-            <string>Length</string>
            </property>
           </column>
          </widget>
