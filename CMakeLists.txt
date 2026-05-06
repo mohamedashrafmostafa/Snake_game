@@ -42,6 +42,8 @@ add_executable(SnakePlusPlus
         #GUI Files
         GUI/Mainwindow.cpp
         GUI/Mainwindow.h
+        GUI/BoardWidget.cpp
+        GUI/BoardWidget.h
         GUI/mainwindow.ui
         GUI/resources.qrc
         icon.rc

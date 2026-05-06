@@ -25,7 +25,7 @@ public:
     ~Mainwindow1() override;
 
 private:
-    Ui::Mainwindow1 *ui{};
+    Ui::Mainwindow1 *ui;
 };
 
 

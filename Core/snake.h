@@ -17,6 +17,6 @@ public:
     Position getHead() const;
     std::deque<Position> getBody() const;
     
-    //void setDirection(Position dir);
-    //Position getDirection() const;
+    void setDirection(Position dir);
+    Position getDirection() const;
 };

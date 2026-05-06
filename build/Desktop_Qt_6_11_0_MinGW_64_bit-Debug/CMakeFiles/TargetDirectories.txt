@@ -1,0 +1,5 @@
+C:/Users/Amr/Downloads/dsa project/project/Snake_game/build/Desktop_Qt_6_11_0_MinGW_64_bit-Debug/CMakeFiles/SnakePlusPlus.dir
+C:/Users/Amr/Downloads/dsa project/project/Snake_game/build/Desktop_Qt_6_11_0_MinGW_64_bit-Debug/CMakeFiles/edit_cache.dir
+C:/Users/Amr/Downloads/dsa project/project/Snake_game/build/Desktop_Qt_6_11_0_MinGW_64_bit-Debug/CMakeFiles/rebuild_cache.dir
+C:/Users/Amr/Downloads/dsa project/project/Snake_game/build/Desktop_Qt_6_11_0_MinGW_64_bit-Debug/CMakeFiles/SnakePlusPlus_autogen_timestamp_deps.dir
+C:/Users/Amr/Downloads/dsa project/project/Snake_game/build/Desktop_Qt_6_11_0_MinGW_64_bit-Debug/CMakeFiles/SnakePlusPlus_autogen.dir
