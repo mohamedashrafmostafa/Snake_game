@@ -72,12 +72,7 @@ void Leaderboard::saveToFile(std::string filename) const {
     file.close();
     std::cout << "Leaderboard saved to \"" << filename << "\".\n";
 }
-// ── loadFromFile ──────────────────────────────────────────────────────────────
-// Reads the format written by saveToFile.
-// Uses addScore so duplicates and merging work identically to normal inserts.
-// Malformed lines are skipped with a warning instead of crashing.
-// Time complexity: O(n log n) — one BST insert per line
-// ─────────────────────────────────────────────────────────────────────────────
+
 void Leaderboard::loadFromFile(std::string filename) {
     std::ifstream file(filename);
 
