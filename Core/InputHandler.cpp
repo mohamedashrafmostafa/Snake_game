@@ -2,8 +2,6 @@
 #ifdef _WIN32
 #include <conio.h>
 #else
-// For non-Windows environments, standard console input is trickier.
-// We'll leave it as a stub or implement termios if requested.
 #endif
 
 // ────────────────────────────────────────────────────────
