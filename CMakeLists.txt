@@ -16,7 +16,7 @@ find_package(Qt6 COMPONENTS Widgets REQUIRED)
 # This MUST come before target_link_libraries!
 add_executable(SnakePlusPlus
         # The Main
-        main.cpp
+        GUI/main.cpp
 
         # The core files
         Core/Board.cpp
