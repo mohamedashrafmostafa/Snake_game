@@ -1,32 +1,56 @@
-//
-// Created by DELL on 5/6/2026.
-//
+#ifndef MAINWINDOW_H
+#define MAINWINDOW_H
 
-#ifndef SNAKE_GAME_MAINWINDOW1_H
-#define SNAKE_GAME_MAINWINDOW1_H
-
-#include <QWidget>
-
+#include <QMainWindow>
+#include <QTimer>
+#include <QKeyEvent>
+#include <QGraphicsDropShadowEffect>
+#include <QShortcut>
+#include "../Core/Game.h"
+#include "BoardWidget.h"
 
 QT_BEGIN_NAMESPACE
-
-namespace Ui {
-    class Mainwindow1;
-}
-
+namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
 
-class Mainwindow1 : public QWidget {
+class MainWindow : public QMainWindow {
     Q_OBJECT
 
 public:
-    explicit Mainwindow1(QWidget *parent = nullptr);
+    explicit MainWindow(QWidget *parent = nullptr);
+    ~MainWindow() override;
 
-    ~Mainwindow1() override;
+protected:
+    void keyPressEvent(QKeyEvent *event) override;
+
+private slots:
+    void on_btnStart_clicked();
+    void on_btnLeaderboard_clicked();
+    void on_btnQuit_clicked();
+    void on_btnPause_clicked();
+    void on_btnMenuFromGame_clicked();
+    void on_btnPlayAgain_clicked();
+    void on_btnBackToMenu_clicked();
+    
+    void gameTick();
+    void onTimeTick();
+    void handleDirectionInput(InputKey key);
 
 private:
-    Ui::Mainwindow1 *ui;
+    Ui::MainWindow *ui;
+    Game game;
+    QTimer *gameTimer;
+    QTimer *timeTimer;
+    int secondsElapsed;
+    BoardWidget *m_boardWidget;
+
+    void setupBoardUI();
+    void setupStyles();
+    void setupShortcuts();
+    void updateBoardDisplay();
+    void updateHUD();
+    void showGameOverScreen();
+    void refreshLeaderboardUI();
 };
 
-
-#endif //SNAKE_GAME_MAINWINDOW1_H
+#endif // MAINWINDOW_H

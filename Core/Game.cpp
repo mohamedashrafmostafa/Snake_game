@@ -110,47 +110,14 @@ void Game::resetGame() {
 //  update() — main game loop
 // ─────────────────────────────────────────────
 void Game::update() {
-    int foodEatenCount = 0;  // tracks when to spawn a power-up
-
     while (!gameOver) {
         auto tickStart = std::chrono::steady_clock::now();
 
         handleInput();
 
-        if (!paused) {
-            // Save state BEFORE moving (for undo)
-            Move currentMove;
-            currentMove.previousTail      = snake.getBody().back();
-            currentMove.previousDirection = currentDirection;
-            currentMove.ateFood           = false;
-            currentMove.earnedPoints      = 0;
+        tick(); // Non-blocking game step
 
-            // Self-collision check BEFORE move() because Member 1's
-            // checkSelfCollision() looks ahead at where the snake WILL move
-            if (snake.checkSelfCollision()) {
-                gameOver = true;
-                showGameOver();
-                return;
-            }
-
-            snake.move();
-
-            checkCollisions();
-
-            currentMove.ateFood      = lastMoveAteFood;
-            currentMove.earnedPoints = lastEarnedPoints;
-            lastEarnedPoints         = 0;  // reset for next tick
-            moveHistory.push(currentMove);
-
-            // Spawn a power-up every POWERUP_SPAWN_INTERVAL foods
-            if (lastMoveAteFood) {
-                foodEatenCount++;
-                if (foodEatenCount % POWERUP_SPAWN_INTERVAL == 0)
-                    spawnPowerUp();
-            }
-
-            tickPowerUps();
-
+        if (!paused && !gameOver) {
             board.render(snake, food);
             displayHUD();
         }
@@ -169,6 +136,126 @@ void Game::update() {
 }
 
 // ─────────────────────────────────────────────
+//  tick() — runs one logic frame (used by QTimer)
+// ─────────────────────────────────────────────
+void Game::tick() {
+    static int foodEatenCount = 0; // tracking inside tick
+
+    if (paused || gameOver) return;
+
+    // Save state BEFORE moving (for undo)
+    Move currentMove;
+    currentMove.previousTail      = snake.getBody().back();
+    currentMove.previousDirection = currentDirection;
+    currentMove.ateFood           = false;
+    currentMove.earnedPoints      = 0;
+
+    // Self-collision check BEFORE move() because Member 1's
+    // checkSelfCollision() looks ahead at where the snake WILL move
+    if (snake.checkSelfCollision()) {
+        gameOver = true;
+        return;
+    }
+
+    snake.move();
+
+    checkCollisions();
+
+    currentMove.ateFood      = lastMoveAteFood;
+    currentMove.earnedPoints = lastEarnedPoints;
+    lastEarnedPoints         = 0;  // reset for next tick
+    moveHistory.push(currentMove);
+
+    // Spawn a power-up every POWERUP_SPAWN_INTERVAL foods
+    if (lastMoveAteFood) {
+        foodEatenCount++;
+        if (foodEatenCount % POWERUP_SPAWN_INTERVAL == 0)
+            spawnPowerUp();
+    }
+
+    tickPowerUps();
+}
+
+// ─────────────────────────────────────────────
+//  processInputGUI() — Handle input from Qt
+// ─────────────────────────────────────────────
+void Game::processInputGUI(InputKey key) {
+    switch (key) {
+        case InputKey::UP:
+            if (currentDirection.y != 1) {
+                currentDirection = {0, -1};
+                snake.setDirection({0, -1});
+            }
+            break;
+
+        case InputKey::DOWN:
+            if (currentDirection.y != -1) {
+                currentDirection = {0, 1};
+                snake.setDirection({0, 1});
+            }
+            break;
+
+        case InputKey::LEFT:
+            if (currentDirection.x != 1) {
+                currentDirection = {-1, 0};
+                snake.setDirection({-1, 0});
+            }
+            break;
+
+        case InputKey::RIGHT:
+            if (currentDirection.x != -1) {
+                currentDirection = {1, 0};
+                snake.setDirection({1, 0});
+            }
+            break;
+
+        case InputKey::PAUSE:
+            paused = !paused;
+            break;
+
+        case InputKey::UNDO:
+            undoLastMove();
+            break;
+
+        case InputKey::QUIT:
+            gameOver = true;
+            break;
+
+        default:
+            break;
+    }
+}
+
+// ─────────────────────────────────────────────
+//  setDifficulty() — Set tick speed & obstacles
+// ─────────────────────────────────────────────
+void Game::setDifficulty(int diff) {
+    board.clear(); // Clear existing obstacles
+    if (diff == Game::EASY) {
+        tickMs = 200;
+        // Few obstacles
+        board.addObstacle({5, 5});
+        board.addObstacle({15, 15});
+    } else if (diff == Game::MEDIUM) {
+        tickMs = BASE_TICK_MS;
+        // Medium obstacles
+        board.addObstacle({5, 5});
+        board.addObstacle({15, 15});
+        board.addObstacle({5, 15});
+        board.addObstacle({15, 5});
+    } else if (diff == Game::HARD) {
+        tickMs = 100;
+        // Many obstacles
+        for(int i=4; i<=16; i+=4) {
+            board.addObstacle({i, 5});
+            board.addObstacle({i, 15});
+        }
+    }
+}
+
+
+
+// ─────────────────────────────────────────────
 //  handleInput()
 //  NOTE: Snake::setDirection() is commented out in Snake.h by Member 1.
 //  We track direction in currentDirection and call snake.setDirection()
@@ -181,28 +268,28 @@ void Game::handleInput() {
         case InputKey::UP:
             if (currentDirection.y != 1) {
                 currentDirection = {0, -1};
-                // snake.setDirection({0, -1});  // uncomment when Member 1 adds it
+                snake.setDirection({0, -1});
             }
             break;
 
         case InputKey::DOWN:
             if (currentDirection.y != -1) {
                 currentDirection = {0, 1};
-                // snake.setDirection({0, 1});
+                snake.setDirection({0, 1});
             }
             break;
 
         case InputKey::LEFT:
             if (currentDirection.x != 1) {
                 currentDirection = {-1, 0};
-                // snake.setDirection({-1, 0});
+                snake.setDirection({-1, 0});
             }
             break;
 
         case InputKey::RIGHT:
             if (currentDirection.x != -1) {
                 currentDirection = {1, 0};
-                // snake.setDirection({1, 0});
+                snake.setDirection({1, 0});
             }
             break;
 

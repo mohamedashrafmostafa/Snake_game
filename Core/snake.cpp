@@ -46,3 +46,11 @@ return currhead;
  std::deque<Position> Snake::getBody() const {
     return body;
 }
+
+void Snake::setDirection(Position dir) {
+    direction = dir;
+}
+
+Position Snake::getDirection() const {
+    return direction;
+}

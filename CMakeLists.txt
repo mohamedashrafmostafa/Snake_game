@@ -37,6 +37,8 @@ add_executable(SnakePlusPlus
         Core/Utils.h
         GUI/Mainwindow.cpp
         GUI/Mainwindow.h
+        GUI/BoardWidget.cpp
+        GUI/BoardWidget.h
         GUI/mainwindow.ui
 )
 
