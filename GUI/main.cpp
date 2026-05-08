@@ -1,7 +1,7 @@
 #include <QApplication>
 #include <iostream>
-#include "GUI/Mainwindow.h"
-#include "Core/Game.h"
+#include "Mainwindow.h"
+#include "../core/Game.h"
 
 int main(int argc, char *argv[]) {
     std::cout << "========================================\n";

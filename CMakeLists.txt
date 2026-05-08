@@ -36,8 +36,7 @@ add_executable(SnakePlusPlus
         Core/PowerUp.h
         Core/snake.cpp
         Core/snake.h
-        Core/Utils.cpp
-        Core/Utils.h
+
 
         #GUI Files
         GUI/Mainwindow.cpp
