@@ -3,7 +3,7 @@ cmake-build-*/
 *.iws
 *.iml
 *.ipr
-
+.qtcreator/
 *.exe
 *.o
 *.obj
