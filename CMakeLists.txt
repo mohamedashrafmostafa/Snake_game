@@ -16,35 +16,35 @@ find_package(Qt6 COMPONENTS Widgets REQUIRED)
 # This MUST come before target_link_libraries!
 add_executable(SnakePlusPlus
         # The Main
-        GUI/main.cpp
+        Src/main.cpp
 
         # The core files
-        Core/Board.cpp
-        Core/Board.h
-        Core/Food.cpp
-        Core/Food.h
-        Core/Game.cpp
-        Core/Game.h
-        Core/InputHandler.cpp
-        Core/InputHandler.h
-        Core/Leaderboard.cpp
-        Core/Leaderboard.h
-        Core/Move.h
-        Core/Position.h
-        Core/Postion.h
-        Core/PowerUp.cpp
-        Core/PowerUp.h
-        Core/snake.cpp
-        Core/snake.h
+        Src/Core/Board.cpp
+        Src/Core/Board.h
+        Src/Core/Food.cpp
+        Src/Core/Food.h
+        Src/Core/Game.cpp
+        Src/Core/Game.h
+        Src/Core/InputHandler.cpp
+        Src/Core/InputHandler.h
+        Src/Core/Leaderboard.cpp
+        Src/Core/Leaderboard.h
+        Src/Core/Move.h
+        Src/Core/Position.h
+        Src/Core/Postion.h
+        Src/Core/PowerUp.cpp
+        Src/Core/PowerUp.h
+        Src/Core/snake.cpp
+        Src/Core/snake.h
 
 
         #GUI Files
-        GUI/Mainwindow.cpp
-        GUI/Mainwindow.h
-        GUI/BoardWidget.cpp
-        GUI/BoardWidget.h
-        GUI/mainwindow.ui
-        GUI/resources.qrc
+        Src/GUI/Mainwindow.cpp
+        Src/GUI/Mainwindow.h
+        Src/GUI/BoardWidget.cpp
+        Src/GUI/BoardWidget.h
+        Src/GUI/mainwindow.ui
+        Src/GUI/resources.qrc
         icon.rc
 )
 
