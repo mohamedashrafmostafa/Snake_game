@@ -1,6 +1,10 @@
 cmake_minimum_required(VERSION 3.20)
 project(Snake_game)
 
+<<<<<<< HEAD
+=======
+# Set the C++ standard
+>>>>>>> c953e4cdc4bd4b480d9a668e2ce1153f2a997499
 set(CMAKE_CXX_STANDARD 20)
 
 # ─── QT CONFIGURATION ─────────────────────────────────────────────
