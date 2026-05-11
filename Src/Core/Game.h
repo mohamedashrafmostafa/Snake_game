@@ -48,12 +48,19 @@ private:
     bool lastMoveAteFood;
     int  lastEarnedPoints;   // exact points earned this tick (used by undo)
 
+    // ── Settings ─────────────────────────────────
+    bool wallWrap;           // Wall Wrap Mode: snake wraps instead of dying at walls
+    int  currentDifficulty;  // Store current difficulty level
+    int  foodEatenCount;     // Moved from static local in tick() for proper reset
+
     // ── Private helpers ──────────────────────────
     void showMenu();
     void showGameOver();
-    void  displayHUD() const;
+    void displayHUD() const;
     void tickPowerUps();
     void spawnPowerUp();     // ADDED: was missing — spawns a power-up on the board
+    void drawConsoleScreen() const;
+    void clearConsole() const;
 
 public:
     Game();
@@ -74,12 +81,25 @@ public:
     void setDifficulty(int diff);
     void setPaused(bool p) { paused = p; }
 
+    // ── Wall Wrap Mode ─────────────────────────────
+    void setWallWrap(bool enabled) { wallWrap = enabled; }
+    bool isWallWrap() const { return wallWrap; }
+
+    // ── Getters for GUI ────────────────────────────
     const Snake& getSnake() const { return snake; }
     const Board& getBoard() const { return board; }
     const Food& getFood() const { return food; }
+    const Leaderboard& getLeaderboard() const { return leaderboard; }
     int getScore() const { return score; }
     int getLevel() const { return currentLevel; }
     int getTickMs() const { return tickMs; }
     bool isGameOver() const { return gameOver; }
     bool isPaused() const { return paused; }
+
+    // ── Power-up / difficulty state for HUD ────────
+    const std::vector<PowerUp>& getActivePowerUps() const { return activePowerUps; }
+    int  getDifficulty() const { return currentDifficulty; }
+    bool isInvincible() const { return invincible; }
+    int  getScoreMultiplier() const { return scoreMultiplier; }
+    int  getPowerUpTicksLeft() const { return powerUpTicksLeft; }
 };

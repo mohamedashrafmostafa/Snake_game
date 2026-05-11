@@ -31,8 +31,6 @@ add_executable(SnakePlusPlus
         Src/Core/Leaderboard.h
         Src/Core/Move.h
         Src/Core/Position.h
-        Src/Core/Postion.h
-        Src/Core/PowerUp.cpp
         Src/Core/PowerUp.h
         Src/Core/snake.cpp
         Src/Core/snake.h

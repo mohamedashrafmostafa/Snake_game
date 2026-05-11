@@ -19,4 +19,7 @@ public:
     
     void setDirection(Position dir);
     Position getDirection() const;
+
+    // ── Wall Wrap support ─────────────────────────────
+    void setHead(Position newHead);   // Update head position after wrapping
 };

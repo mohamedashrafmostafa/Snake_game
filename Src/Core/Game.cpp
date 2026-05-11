@@ -34,7 +34,10 @@ Game::Game()
       invincible(false),
       powerUpTicksLeft(0),
       lastMoveAteFood(false),
-      lastEarnedPoints(0)
+      lastEarnedPoints(0),
+      wallWrap(false),
+      currentDifficulty(MEDIUM),
+      foodEatenCount(0)
 {
     srand(static_cast<unsigned int>(time(nullptr)));
 }
@@ -48,33 +51,68 @@ void Game::start() {
 }
 
 // ─────────────────────────────────────────────
+// ─────────────────────────────────────────────
+//  clearConsole()
+// ─────────────────────────────────────────────
+void Game::clearConsole() const {
+#ifdef _WIN32
+    system("cls");
+#else
+    system("clear");
+#endif
+}
+
+// ─────────────────────────────────────────────
 //  showMenu()
 // ─────────────────────────────────────────────
 void Game::showMenu() {
     while (true) {
-        system("cls");
-        std::cout << "================================\n";
-        std::cout << "         SNAKE GAME             \n";
-        std::cout << "================================\n";
-        std::cout << "  1. Start Game\n";
+        clearConsole();
+        std::cout << "========================================\n";
+        std::cout << "              SNAKE++\n";
+        std::cout << "========================================\n";
+        std::cout << "  1. Play Game\n";
         std::cout << "  2. View Leaderboard\n";
-        std::cout << "  3. Quit\n";
-        std::cout << "================================\n";
+        std::cout << "  3. Settings / Difficulty\n";
+        std::cout << "  4. Instructions\n";
+        std::cout << "  5. Exit\n";
+        std::cout << "========================================\n";
         std::cout << "Choose: ";
 
         int choice;
-        std::cin >> choice;
+        if (!(std::cin >> choice)) {
+            std::cin.clear();
+            std::string discard;
+            std::cin >> discard;
+            continue;
+        }
 
         if (choice == 1) {
             resetGame();
             update();
         } else if (choice == 2) {
-            system("cls");
+            clearConsole();
             leaderboard.displayTop10();
-            std::cout << "\nPress Enter to go back...";
-            std::cin.ignore();
+            std::cout << "\nPress Enter to return to menu...";
+            std::cin.ignore(10000, '\n');
             std::cin.get();
         } else if (choice == 3) {
+            clearConsole();
+            std::cout << "Select Difficulty:\n1. Easy\n2. Medium\n3. Hard\nChoice: ";
+            int diff;
+            if (std::cin >> diff && diff >= 1 && diff <= 3) {
+                setDifficulty(diff);
+            } else {
+                std::cin.clear();
+                std::string discard;
+                std::cin >> discard;
+            }
+        } else if (choice == 4) {
+            clearConsole();
+            std::cout << "Instructions:\nWASD to move, P to pause, Q to quit.\nCollect food, avoid walls and obstacles.\n\nPress Enter to return to menu...";
+            std::cin.ignore(10000, '\n');
+            std::cin.get();
+        } else if (choice == 5) {
             break;
         }
     }
@@ -85,25 +123,29 @@ void Game::showMenu() {
 // ─────────────────────────────────────────────
 void Game::resetGame() {
     snake            = Snake();
-    board            = Board(BOARD_WIDTH, BOARD_HEIGHT);
     currentDirection = {1, 0};
 
     score            = 0;
     currentLevel     = 1;
     gameOver         = false;
     paused           = false;
-    tickMs           = BASE_TICK_MS;
+    // tickMs is managed by setDifficulty
     scoreMultiplier  = 1;
     invincible       = false;
     powerUpTicksLeft = 0;
     lastMoveAteFood  = false;
     lastEarnedPoints = 0;
+    foodEatenCount   = 0;       // FIX: was static in tick(), now properly reset
+
+    // NOTE: wallWrap and currentDifficulty are preserved — set before resetGame()
 
     activePowerUps.clear();
     while (!moveHistory.empty()) moveHistory.pop();
 
-    spawnFood();
+    // Ensure obstacles are placed based on currentDifficulty before spawning food
+    setDifficulty(currentDifficulty);
 
+    spawnFood();
 }
 
 // ─────────────────────────────────────────────
@@ -118,8 +160,8 @@ void Game::update() {
         tick(); // Non-blocking game step
 
         if (!paused && !gameOver) {
-            board.render(snake, food);
-            displayHUD();
+            clearConsole();
+            drawConsoleScreen();
         }
 
         // Sleep for the remainder of the tick
@@ -136,11 +178,74 @@ void Game::update() {
 }
 
 // ─────────────────────────────────────────────
+//  drawConsoleScreen()
+// ─────────────────────────────────────────────
+void Game::drawConsoleScreen() const {
+    std::cout << "========================================\n";
+    std::cout << "              SNAKE++\n";
+    std::cout << "========================================\n";
+    std::cout << "Score: " << score << "    Level: " << currentLevel << "    Length: " << snake.getBody().size() << "\n";
+
+    std::string puStr = "None";
+    if (invincible) puStr = "Shield (" + std::to_string(powerUpTicksLeft) + ")";
+    else if (scoreMultiplier > 1) puStr = "x2 Score (" + std::to_string(powerUpTicksLeft) + ")";
+    else if (tickMs == FAST_TICK_MS) puStr = "Speed (" + std::to_string(powerUpTicksLeft) + ")";
+    std::cout << "Speed: " << tickMs << "ms    Power-Up: " << puStr << "\n";
+    std::cout << "----------------------------------------\n";
+
+    // Build the grid
+    std::vector<std::string> grid(BOARD_HEIGHT, std::string(BOARD_WIDTH, ' '));
+
+    // Draw obstacles
+    for (const Position& obs : board.getObstacles()) {
+        if (obs.x >= 0 && obs.x < BOARD_WIDTH && obs.y >= 0 && obs.y < BOARD_HEIGHT)
+            grid[obs.y][obs.x] = '#';
+    }
+
+    // Draw active powerups
+    for (const PowerUp& pu : activePowerUps) {
+        if (pu.pos.x >= 0 && pu.pos.x < BOARD_WIDTH && pu.pos.y >= 0 && pu.pos.y < BOARD_HEIGHT) {
+            if (pu.type == P_SPEED_UP) grid[pu.pos.y][pu.pos.x] = 'S';
+            else if (pu.type == INVINCIBILITY) grid[pu.pos.y][pu.pos.x] = 'I';
+            else if (pu.type == SCORE_MULTIPLIER) grid[pu.pos.y][pu.pos.x] = 'M';
+        }
+    }
+
+    // Draw food
+    Position fPos = food.getPosition();
+    if (fPos.x >= 0 && fPos.x < BOARD_WIDTH && fPos.y >= 0 && fPos.y < BOARD_HEIGHT) {
+        if (food.getType() == NORMAL) grid[fPos.y][fPos.x] = '@';
+        else if (food.getType() == BONUS) grid[fPos.y][fPos.x] = '*';
+        else grid[fPos.y][fPos.x] = '&';
+    }
+
+    // Draw snake body
+    const auto& body = snake.getBody();
+    for (size_t i = 0; i < body.size(); ++i) {
+        Position p = body[i];
+        if (p.x >= 0 && p.x < BOARD_WIDTH && p.y >= 0 && p.y < BOARD_HEIGHT) {
+            grid[p.y][p.x] = (i == 0) ? 'O' : 'o';
+        }
+    }
+
+    // Print the grid with borders
+    for (int y = 0; y < BOARD_HEIGHT; ++y) {
+        std::cout << "|";
+        for (int x = 0; x < BOARD_WIDTH; ++x) {
+            std::cout << grid[y][x];
+        }
+        std::cout << "|\n";
+    }
+
+    std::cout << "----------------------------------------\n";
+    std::cout << "Controls: WASD move | P pause | Q quit\n";
+    std::cout << "========================================\n";
+}
+
+// ─────────────────────────────────────────────
 //  tick() — runs one logic frame (used by QTimer)
 // ─────────────────────────────────────────────
 void Game::tick() {
-    static int foodEatenCount = 0; // tracking inside tick
-
     if (paused || gameOver) return;
 
     // Save state BEFORE moving (for undo)
@@ -159,6 +264,21 @@ void Game::tick() {
 
     snake.move();
 
+    // ── Wall Wrap / Invincibility: teleport head to opposite side ────
+    if (wallWrap || invincible) {
+        Position head = snake.getHead();
+        bool wrapped = false;
+
+        if (head.x < 0)             { head.x = BOARD_WIDTH  - 1; wrapped = true; }
+        if (head.x >= BOARD_WIDTH)  { head.x = 0;               wrapped = true; }
+        if (head.y < 0)             { head.y = BOARD_HEIGHT - 1; wrapped = true; }
+        if (head.y >= BOARD_HEIGHT) { head.y = 0;               wrapped = true; }
+
+        if (wrapped) {
+            snake.setHead(head);  // Update deque front + bodySet
+        }
+    }
+
     checkCollisions();
 
     currentMove.ateFood      = lastMoveAteFood;
@@ -168,7 +288,7 @@ void Game::tick() {
 
     // Spawn a power-up every POWERUP_SPAWN_INTERVAL foods
     if (lastMoveAteFood) {
-        foodEatenCount++;
+        foodEatenCount++;         // FIX: now a member variable, properly reset
         if (foodEatenCount % POWERUP_SPAWN_INTERVAL == 0)
             spawnPowerUp();
     }
@@ -230,6 +350,7 @@ void Game::processInputGUI(InputKey key) {
 //  setDifficulty() — Set tick speed & obstacles
 // ─────────────────────────────────────────────
 void Game::setDifficulty(int diff) {
+    currentDifficulty = diff;
     board.clear(); // Clear existing obstacles
     if (diff == Game::EASY) {
         tickMs = 200;
@@ -257,9 +378,6 @@ void Game::setDifficulty(int diff) {
 
 // ─────────────────────────────────────────────
 //  handleInput()
-//  NOTE: Snake::setDirection() is commented out in Snake.h by Member 1.
-//  We track direction in currentDirection and call snake.setDirection()
-//  once Member 1 uncomments it. Lines are ready — just uncomment them.
 // ─────────────────────────────────────────────
 void Game::handleInput() {
     InputKey key = InputHandler::getKeyPress();
@@ -296,13 +414,8 @@ void Game::handleInput() {
         case InputKey::PAUSE:
             paused = !paused;
             if (paused) {
-                system("cls");
                 std::cout << "\n  *** PAUSED - press P to resume ***\n";
             }
-            break;
-
-        case InputKey::UNDO:
-            undoLastMove();
             break;
 
         case InputKey::QUIT:
@@ -319,12 +432,16 @@ void Game::handleInput() {
 //  Key data structure: unordered_set for O(1) occupied-cell lookup
 // ─────────────────────────────────────────────
 void Game::spawnFood() {
-    // Collect all occupied positions (snake body + active power-up positions)
+    // Collect all occupied positions (snake body + active power-up positions + obstacles)
     std::unordered_set<Position, PositionHash> occupied;
     for (const Position& p : snake.getBody())
         occupied.insert(p);
     for (const PowerUp& pu : activePowerUps)
         occupied.insert(pu.pos);
+
+    // FIX: also exclude obstacle positions so food never spawns on obstacles
+    for (const Position& obs : board.getObstacles())
+        occupied.insert(obs);
 
     // Weighted random food type
     int roll = rand() % 10;
@@ -356,6 +473,8 @@ void Game::spawnPowerUp() {
     occupied.insert(food.getPosition());
     for (const PowerUp& pu : activePowerUps)
         occupied.insert(pu.pos);
+    for (const Position& obs : board.getObstacles())
+        occupied.insert(obs);
 
     // Pick a random PowerUpType
     PowerUpType types[3] = { PowerUpType::P_SPEED_UP, PowerUpType::INVINCIBILITY, PowerUpType::SCORE_MULTIPLIER };
@@ -383,13 +502,13 @@ void Game::checkCollisions() {
     lastMoveAteFood = false;
     Position head   = snake.getHead();
 
-    // 1. Wall collision
-    if (!invincible && !board.isInsideBoard(head)) {
+    // 1. Wall collision — SKIP if wall wrap is enabled (already handled in tick())
+    if (!wallWrap && !invincible && !board.isInsideBoard(head)) {
         gameOver = true;
         return;
     }
 
-    // 2. Obstacle collision
+    // 2. Obstacle collision (obstacles still kill even with wall wrap)
     if (!invincible && board.isObstacle(head)) {
         gameOver = true;
         return;
@@ -491,24 +610,29 @@ void Game::saveCurrentScore(std::string playerName) {
 //  showGameOver()
 // ─────────────────────────────────────────────
 void Game::showGameOver() {
-    system("cls");
-    std::cout << "================================\n";
+    clearConsole();
+    std::cout << "========================================\n";
     std::cout << "          GAME OVER             \n";
-    std::cout << "================================\n";
+    std::cout << "========================================\n";
     std::cout << "  Final Score : " << score        << "\n";
     std::cout << "  Level       : " << currentLevel << "\n";
-    std::cout << "================================\n";
+    std::cout << "  Length      : " << snake.getBody().size() << "\n";
+    std::cout << "========================================\n";
     std::cout << "  Enter your name: ";
 
     std::string name;
-    std::cin >> name;
-    saveCurrentScore(name);
-
-    std::cout << "\n  Score saved! Top 10:\n\n";
-    leaderboard.displayTop10();
+    if (std::cin >> name) {
+        saveCurrentScore(name);
+        std::cout << "\n  Score saved! Top 10:\n\n";
+        leaderboard.displayTop10();
+    } else {
+        std::cin.clear();
+        std::string discard;
+        std::cin >> discard;
+    }
 
     std::cout << "\n  Press Enter to return to menu...";
-    std::cin.ignore();
+    std::cin.ignore(10000, '\n');
     std::cin.get();
 
     showMenu();
