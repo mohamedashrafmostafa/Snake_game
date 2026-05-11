@@ -16,10 +16,11 @@ protected:
 private:
     Game* m_game;
 
-    void drawGrid(QPainter& painter, int width, int height, int cellW, int cellH);
+    void drawGrid(QPainter& painter, int cols, int rows, int cellW, int cellH);
     void drawSnake(QPainter& painter, int cellW, int cellH);
     void drawFood(QPainter& painter, int cellW, int cellH);
     void drawObstacles(QPainter& painter, int cellW, int cellH);
+    void drawPowerUps(QPainter& painter, int cellW, int cellH);
 };
 
 #endif // BOARDWIDGET_H
