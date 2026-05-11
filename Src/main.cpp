@@ -15,7 +15,7 @@ int main(int argc, char *argv[]) {
     int choice;
     if (!(std::cin >> choice)) {
         std::cin.clear(); // Clear error state
-        choice = 2; // Default to GUI if invalid input
+        choice = 2;
     }
 
     if (choice == 1) {
