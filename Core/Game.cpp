@@ -175,25 +175,29 @@ void Game::processInputGUI(InputKey key) {
 // ─────────────────────────────────────────────
 void Game::setDifficulty(int diff) {
     currentDifficulty = diff;
+    int rand_num_obstacles = 0;
+    int rand_x = rand() % BOARD_WIDTH;
+    int rand_y = rand() % BOARD_HEIGHT;
     board.clear(); // Clear existing obstacles
     if (diff == Game::EASY) {
         tickMs = 200;
-        // Few obstacles
-        board.addObstacle({5, 5});
-        board.addObstacle({15, 15});
     } else if (diff == Game::MEDIUM) {
         tickMs = BASE_TICK_MS;
         // Medium obstacles
-        board.addObstacle({5, 5});
-        board.addObstacle({15, 15});
-        board.addObstacle({5, 15});
-        board.addObstacle({15, 5});
+        rand_num_obstacles = 2 + rand() % 4; // 2 to 5 obstacles
+        for (int i = 0; i < rand_num_obstacles; ++i) {
+            rand_x = rand() % BOARD_WIDTH;
+            rand_y = rand() % BOARD_HEIGHT;
+            board.addObstacle({rand_x, rand_y});
+        }
     } else if (diff == Game::HARD) {
         tickMs = 100;
         // Many obstacles
-        for(int i=4; i<=16; i+=4) {
-            board.addObstacle({i, 5});
-            board.addObstacle({i, 15});
+        rand_num_obstacles = 10 + rand() % 11; // 10 to 20 obstacles
+        for (int i = 0; i < rand_num_obstacles; ++i) {
+            rand_x = rand() % BOARD_WIDTH;
+            rand_y = rand() % BOARD_HEIGHT;
+            board.addObstacle({rand_x, rand_y});
         }
     }
 }

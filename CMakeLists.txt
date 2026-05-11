@@ -13,6 +13,7 @@ find_package(Qt6 COMPONENTS Widgets REQUIRED)
 # ─── EXECUTABLE CONFIGURATION ─────────────────────────────────────
 add_executable(SnakePlusPlus
 main.cpp
+icon.rc
 Core/Board.cpp
 Core/Board.h
 Core/Food.cpp
@@ -34,5 +35,7 @@ GUI/Mainwindow.h
 GUI/BoardWidget.cpp
 GUI/BoardWidget.h
 )
-
+set_target_properties(SnakePlusPlus PROPERTIES
+    WIN32_EXECUTABLE TRUE
+)
 target_link_libraries(SnakePlusPlus PRIVATE Qt6::Widgets)
