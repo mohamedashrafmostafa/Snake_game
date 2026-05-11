@@ -25,8 +25,8 @@ add_executable(SnakePlusPlus
         Core/Leaderboard.h
         Core/Move.h
         Core/Position.h
-        Core/PowerUp.cpp
-        Core/PowerUp.h
+
+
         Core/snake.cpp
         Core/snake.h
         GUI/Mainwindow.cpp

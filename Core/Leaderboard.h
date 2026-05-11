@@ -13,7 +13,6 @@ private:
 public:
     const std::map<int, std::vector<std::string>, std::greater<int>>& getScores() const { return scores; }
     void addScore(std::string name, int score);
-    void displayTop10() const;
     void saveToFile(std::string filename) const;
     void loadFromFile(std::string filename);
 };

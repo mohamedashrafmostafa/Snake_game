@@ -44,7 +44,7 @@ protected:
             double y = cy + 16 * sin(2 * st);
             
             if (i == 0) { // Head
-                double r = 7.5;
+                double r = 10.5;
                 p.setPen(QPen(QColor("#0A0E1A"), 2));
                 p.setBrush(QColor("#24D17E")); // Bright green head
                 p.drawEllipse(QPointF(x, y), r, r);
@@ -59,13 +59,13 @@ protected:
                 double nx = -dy, ny = dx;
                 
                 // Eyes
-                p.setBrush(QColor("#0A0E1A"));
+                p.setBrush(QColor("#2a05fc"));
                 p.setPen(Qt::NoPen);
                 p.drawEllipse(QPointF(x + dx*2 + nx*3, y + dy*2 + ny*3), 1.5, 1.5);
                 p.drawEllipse(QPointF(x + dx*2 - nx*3, y + dy*2 - ny*3), 1.5, 1.5);
                 
                 // Tongue
-                p.setPen(QPen(QColor("#FF4D6D"), 1.5, Qt::SolidLine, Qt::RoundCap));
+                p.setPen(QPen(QColor("#ff0000"), 1.5, Qt::SolidLine, Qt::RoundCap));
                 p.drawLine(QPointF(x + dx*7, y + dy*7), QPointF(x + dx*11, y + dy*11));
             } else { // Body
                 double r = 6.0 - (i * 0.15); // Tapere towards tail
@@ -541,8 +541,8 @@ void MainWindow::gameTick() {
     if (game.isGameOver()) { gameTimer->stop(); timeTimer->stop(); showGameOverScreen(); return; }
     if (!game.isPaused()) {
         game.tick();
-        if (game.isGameOver()) { gameTimer->stop(); timeTimer->stop(); showGameOverScreen(); return; }
         updateBoardDisplay(); updateHUD();
+        if (game.isGameOver()) { gameTimer->stop(); timeTimer->stop(); showGameOverScreen(); return; }
         gameTimer->setInterval(game.getTickMs());
     }
 }

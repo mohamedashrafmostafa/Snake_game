@@ -1,4 +1,3 @@
-#include <iostream>
 #include "snake.h"
 Snake::Snake () {
     direction={1,0};//4 values: left,right,up,down

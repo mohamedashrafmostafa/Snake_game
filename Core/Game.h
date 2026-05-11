@@ -54,24 +54,15 @@ private:
     int  foodEatenCount;     // Moved from static local in tick() for proper reset
 
     // ── Private helpers ──────────────────────────
-    void showMenu();
-    void showGameOver();
-    void displayHUD() const;
     void tickPowerUps();
     void spawnPowerUp();     // ADDED: was missing — spawns a power-up on the board
-    void drawConsoleScreen() const;
-    void clearConsole() const;
 
 public:
     Game();
-    void start();
-    void update();
-    void handleInput();
 
     void spawnFood();
     void checkCollisions();
     void applyPowerUp(PowerUpType type);
-    void undoLastMove();
     void saveCurrentScore(std::string playerName);
 
     // ── Added for GUI Integration ──────────────────

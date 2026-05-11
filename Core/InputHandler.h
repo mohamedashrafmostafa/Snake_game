@@ -14,7 +14,6 @@ enum class InputKey {
 
 class InputHandler {
 public:
-    // This function must be non-blocking.
-    // It checks if a key was pressed and returns the corresponding InputKey.
-    static InputKey getKeyPress();
+    // Note: GUI input is handled directly by Qt events, not through this class
+    // This is kept for compatibility with InputKey enum
 };
