@@ -1,10 +1,6 @@
 cmake_minimum_required(VERSION 3.20)
 project(Snake_game)
 
-<<<<<<< HEAD
-=======
-# Set the C++ standard
->>>>>>> c953e4cdc4bd4b480d9a668e2ce1153f2a997499
 set(CMAKE_CXX_STANDARD 20)
 
 # ─── QT CONFIGURATION ─────────────────────────────────────────────
@@ -16,27 +12,27 @@ find_package(Qt6 COMPONENTS Widgets REQUIRED)
 
 # ─── EXECUTABLE CONFIGURATION ─────────────────────────────────────
 add_executable(SnakePlusPlus
-        main.cpp
-        Core/Board.cpp
-        Core/Board.h
-        Core/Food.cpp
-        Core/Food.h
-        Core/Game.cpp
-        Core/Game.h
-        Core/InputHandler.cpp
-        Core/InputHandler.h
-        Core/Leaderboard.cpp
-        Core/Leaderboard.h
-        Core/Move.h
-        Core/Position.h
+main.cpp
+Core/Board.cpp
+Core/Board.h
+Core/Food.cpp
+Core/Food.h
+Core/Game.cpp
+Core/Game.h
+Core/InputHandler.cpp
+Core/InputHandler.h
+Core/Leaderboard.cpp
+Core/Leaderboard.h
+Core/Move.h
+Core/Position.h
 
 
-        Core/snake.cpp
-        Core/snake.h
-        GUI/Mainwindow.cpp
-        GUI/Mainwindow.h
-        GUI/BoardWidget.cpp
-        GUI/BoardWidget.h
+Core/snake.cpp
+Core/snake.h
+GUI/Mainwindow.cpp
+GUI/Mainwindow.h
+GUI/BoardWidget.cpp
+GUI/BoardWidget.h
 )
 
 target_link_libraries(SnakePlusPlus PRIVATE Qt6::Widgets)
