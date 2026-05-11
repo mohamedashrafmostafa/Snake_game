@@ -203,26 +203,11 @@ CMakeFiles/SnakePlusPlus.dir/Core/snake.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/SnakePlusPlus.dir/Core/snake.cpp.s"
 	C:\Qt\Tools\mingw1310_64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "C:\Users\Amr\Downloads\dsa project\project\Snake_game\Core\snake.cpp" -o CMakeFiles\SnakePlusPlus.dir\Core\snake.cpp.s
 
-CMakeFiles/SnakePlusPlus.dir/Core/Utils.cpp.obj: CMakeFiles/SnakePlusPlus.dir/flags.make
-CMakeFiles/SnakePlusPlus.dir/Core/Utils.cpp.obj: CMakeFiles/SnakePlusPlus.dir/includes_CXX.rsp
-CMakeFiles/SnakePlusPlus.dir/Core/Utils.cpp.obj: C:/Users/Amr/Downloads/dsa\ project/project/Snake_game/Core/Utils.cpp
-CMakeFiles/SnakePlusPlus.dir/Core/Utils.cpp.obj: CMakeFiles/SnakePlusPlus.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="C:\Users\Amr\Downloads\dsa project\project\Snake_game\build\Desktop_Qt_6_11_0_MinGW_64_bit-Debug\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/SnakePlusPlus.dir/Core/Utils.cpp.obj"
-	C:\Qt\Tools\mingw1310_64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/SnakePlusPlus.dir/Core/Utils.cpp.obj -MF CMakeFiles\SnakePlusPlus.dir\Core\Utils.cpp.obj.d -o CMakeFiles\SnakePlusPlus.dir\Core\Utils.cpp.obj -c "C:\Users\Amr\Downloads\dsa project\project\Snake_game\Core\Utils.cpp"
-
-CMakeFiles/SnakePlusPlus.dir/Core/Utils.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/SnakePlusPlus.dir/Core/Utils.cpp.i"
-	C:\Qt\Tools\mingw1310_64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "C:\Users\Amr\Downloads\dsa project\project\Snake_game\Core\Utils.cpp" > CMakeFiles\SnakePlusPlus.dir\Core\Utils.cpp.i
-
-CMakeFiles/SnakePlusPlus.dir/Core/Utils.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/SnakePlusPlus.dir/Core/Utils.cpp.s"
-	C:\Qt\Tools\mingw1310_64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "C:\Users\Amr\Downloads\dsa project\project\Snake_game\Core\Utils.cpp" -o CMakeFiles\SnakePlusPlus.dir\Core\Utils.cpp.s
-
 CMakeFiles/SnakePlusPlus.dir/GUI/Mainwindow.cpp.obj: CMakeFiles/SnakePlusPlus.dir/flags.make
 CMakeFiles/SnakePlusPlus.dir/GUI/Mainwindow.cpp.obj: CMakeFiles/SnakePlusPlus.dir/includes_CXX.rsp
 CMakeFiles/SnakePlusPlus.dir/GUI/Mainwindow.cpp.obj: C:/Users/Amr/Downloads/dsa\ project/project/Snake_game/GUI/Mainwindow.cpp
 CMakeFiles/SnakePlusPlus.dir/GUI/Mainwindow.cpp.obj: CMakeFiles/SnakePlusPlus.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="C:\Users\Amr\Downloads\dsa project\project\Snake_game\build\Desktop_Qt_6_11_0_MinGW_64_bit-Debug\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object CMakeFiles/SnakePlusPlus.dir/GUI/Mainwindow.cpp.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="C:\Users\Amr\Downloads\dsa project\project\Snake_game\build\Desktop_Qt_6_11_0_MinGW_64_bit-Debug\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/SnakePlusPlus.dir/GUI/Mainwindow.cpp.obj"
 	C:\Qt\Tools\mingw1310_64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/SnakePlusPlus.dir/GUI/Mainwindow.cpp.obj -MF CMakeFiles\SnakePlusPlus.dir\GUI\Mainwindow.cpp.obj.d -o CMakeFiles\SnakePlusPlus.dir\GUI\Mainwindow.cpp.obj -c "C:\Users\Amr\Downloads\dsa project\project\Snake_game\GUI\Mainwindow.cpp"
 
 CMakeFiles/SnakePlusPlus.dir/GUI/Mainwindow.cpp.i: cmake_force
@@ -237,7 +222,7 @@ CMakeFiles/SnakePlusPlus.dir/GUI/BoardWidget.cpp.obj: CMakeFiles/SnakePlusPlus.d
 CMakeFiles/SnakePlusPlus.dir/GUI/BoardWidget.cpp.obj: CMakeFiles/SnakePlusPlus.dir/includes_CXX.rsp
 CMakeFiles/SnakePlusPlus.dir/GUI/BoardWidget.cpp.obj: C:/Users/Amr/Downloads/dsa\ project/project/Snake_game/GUI/BoardWidget.cpp
 CMakeFiles/SnakePlusPlus.dir/GUI/BoardWidget.cpp.obj: CMakeFiles/SnakePlusPlus.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="C:\Users\Amr\Downloads\dsa project\project\Snake_game\build\Desktop_Qt_6_11_0_MinGW_64_bit-Debug\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object CMakeFiles/SnakePlusPlus.dir/GUI/BoardWidget.cpp.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="C:\Users\Amr\Downloads\dsa project\project\Snake_game\build\Desktop_Qt_6_11_0_MinGW_64_bit-Debug\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object CMakeFiles/SnakePlusPlus.dir/GUI/BoardWidget.cpp.obj"
 	C:\Qt\Tools\mingw1310_64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/SnakePlusPlus.dir/GUI/BoardWidget.cpp.obj -MF CMakeFiles\SnakePlusPlus.dir\GUI\BoardWidget.cpp.obj.d -o CMakeFiles\SnakePlusPlus.dir\GUI\BoardWidget.cpp.obj -c "C:\Users\Amr\Downloads\dsa project\project\Snake_game\GUI\BoardWidget.cpp"
 
 CMakeFiles/SnakePlusPlus.dir/GUI/BoardWidget.cpp.i: cmake_force
@@ -259,7 +244,6 @@ SnakePlusPlus_OBJECTS = \
 "CMakeFiles/SnakePlusPlus.dir/Core/Leaderboard.cpp.obj" \
 "CMakeFiles/SnakePlusPlus.dir/Core/PowerUp.cpp.obj" \
 "CMakeFiles/SnakePlusPlus.dir/Core/snake.cpp.obj" \
-"CMakeFiles/SnakePlusPlus.dir/Core/Utils.cpp.obj" \
 "CMakeFiles/SnakePlusPlus.dir/GUI/Mainwindow.cpp.obj" \
 "CMakeFiles/SnakePlusPlus.dir/GUI/BoardWidget.cpp.obj"
 
@@ -275,7 +259,6 @@ SnakePlusPlus.exe: CMakeFiles/SnakePlusPlus.dir/Core/InputHandler.cpp.obj
 SnakePlusPlus.exe: CMakeFiles/SnakePlusPlus.dir/Core/Leaderboard.cpp.obj
 SnakePlusPlus.exe: CMakeFiles/SnakePlusPlus.dir/Core/PowerUp.cpp.obj
 SnakePlusPlus.exe: CMakeFiles/SnakePlusPlus.dir/Core/snake.cpp.obj
-SnakePlusPlus.exe: CMakeFiles/SnakePlusPlus.dir/Core/Utils.cpp.obj
 SnakePlusPlus.exe: CMakeFiles/SnakePlusPlus.dir/GUI/Mainwindow.cpp.obj
 SnakePlusPlus.exe: CMakeFiles/SnakePlusPlus.dir/GUI/BoardWidget.cpp.obj
 SnakePlusPlus.exe: CMakeFiles/SnakePlusPlus.dir/build.make
@@ -285,7 +268,7 @@ SnakePlusPlus.exe: C:/Qt/6.11.0/mingw_64/lib/libQt6Core.a
 SnakePlusPlus.exe: CMakeFiles/SnakePlusPlus.dir/linkLibs.rsp
 SnakePlusPlus.exe: CMakeFiles/SnakePlusPlus.dir/objects1.rsp
 SnakePlusPlus.exe: CMakeFiles/SnakePlusPlus.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir="C:\Users\Amr\Downloads\dsa project\project\Snake_game\build\Desktop_Qt_6_11_0_MinGW_64_bit-Debug\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_13) "Linking CXX executable SnakePlusPlus.exe"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir="C:\Users\Amr\Downloads\dsa project\project\Snake_game\build\Desktop_Qt_6_11_0_MinGW_64_bit-Debug\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_12) "Linking CXX executable SnakePlusPlus.exe"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles\SnakePlusPlus.dir\link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

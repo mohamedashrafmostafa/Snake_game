@@ -29,7 +29,6 @@ InputKey InputHandler::getKeyPress() {
                 case 'd': case 'D': return InputKey::RIGHT;
                 case 'p': case 'P': return InputKey::PAUSE;
                 case 'q': case 'Q': return InputKey::QUIT;
-                case 'z': case 'Z': return InputKey::UNDO;
             }
         }
     }

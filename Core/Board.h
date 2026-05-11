@@ -20,4 +20,9 @@ public:
     void addObstacle(Position pos);
     bool isInsideBoard(Position pos) const;             // Check board boundaries
     void loadMapFromFile(std::string filename);         // Extra feature: load different maps
+
+    // ── Getters for GUI rendering ─────────────────────
+    const std::unordered_set<Position, PositionHash>& getObstacles() const { return obstacles; }
+    int getWidth()  const { return width; }
+    int getHeight() const { return height; }
 };

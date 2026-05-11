@@ -487,4 +487,39 @@ CMakeFiles/SnakePlusPlus.dir/SnakePlusPlus_autogen/mocs_compilation.cpp.obj: \
  C:/Qt/6.11.0/mingw_64/include/QtWidgets/qgraphicseffect.h \
  C:/Qt/6.11.0/mingw_64/include/QtGui/QShortcut \
  C:/Qt/6.11.0/mingw_64/include/QtGui/qshortcut.h \
+ C:/Qt/6.11.0/mingw_64/include/QtWidgets/QStackedWidget \
+ C:/Qt/6.11.0/mingw_64/include/QtWidgets/qstackedwidget.h \
+ C:/Qt/6.11.0/mingw_64/include/QtWidgets/qframe.h \
+ C:/Qt/6.11.0/mingw_64/include/QtWidgets/QLabel \
+ C:/Qt/6.11.0/mingw_64/include/QtWidgets/qlabel.h \
+ C:/Qt/6.11.0/mingw_64/include/QtGui/qpicture.h \
+ C:/Qt/6.11.0/mingw_64/include/QtGui/qtextdocument.h \
+ C:/Qt/6.11.0/mingw_64/include/QtWidgets/QPushButton \
+ C:/Qt/6.11.0/mingw_64/include/QtWidgets/qpushbutton.h \
+ C:/Qt/6.11.0/mingw_64/include/QtWidgets/qabstractbutton.h \
+ C:/Qt/6.11.0/mingw_64/include/QtWidgets/QLineEdit \
+ C:/Qt/6.11.0/mingw_64/include/QtWidgets/qlineedit.h \
+ C:/Qt/6.11.0/mingw_64/include/QtGui/qtextcursor.h \
+ C:/Qt/6.11.0/mingw_64/include/QtGui/qtextformat.h \
+ C:/Qt/6.11.0/mingw_64/include/QtWidgets/QComboBox \
+ C:/Qt/6.11.0/mingw_64/include/QtWidgets/qcombobox.h \
+ C:/Qt/6.11.0/mingw_64/include/QtWidgets/qabstractitemdelegate.h \
+ C:/Qt/6.11.0/mingw_64/include/QtWidgets/qstyleoption.h \
+ C:/Qt/6.11.0/mingw_64/include/QtWidgets/qabstractspinbox.h \
+ C:/Qt/6.11.0/mingw_64/include/QtGui/qvalidator.h \
+ C:/Qt/6.11.0/mingw_64/include/QtCore/qregularexpression.h \
+ C:/Qt/6.11.0/mingw_64/include/QtWidgets/qslider.h \
+ C:/Qt/6.11.0/mingw_64/include/QtWidgets/qabstractslider.h \
+ C:/Qt/6.11.0/mingw_64/include/QtWidgets/qstyle.h \
+ C:/Qt/6.11.0/mingw_64/include/QtWidgets/qtabbar.h \
+ C:/Qt/6.11.0/mingw_64/include/QtWidgets/qrubberband.h \
+ C:/Qt/6.11.0/mingw_64/include/QtCore/qabstractitemmodel.h \
+ C:/Qt/6.11.0/mingw_64/include/QtWidgets/QCheckBox \
+ C:/Qt/6.11.0/mingw_64/include/QtWidgets/qcheckbox.h \
+ C:/Qt/6.11.0/mingw_64/include/QtWidgets/QTableWidget \
+ C:/Qt/6.11.0/mingw_64/include/QtWidgets/qtablewidget.h \
+ C:/Qt/6.11.0/mingw_64/include/QtWidgets/qtableview.h \
+ C:/Qt/6.11.0/mingw_64/include/QtWidgets/qabstractitemview.h \
+ C:/Qt/6.11.0/mingw_64/include/QtWidgets/qabstractscrollarea.h \
+ C:/Qt/6.11.0/mingw_64/include/QtCore/qitemselectionmodel.h \
  C:/Users/Amr/Downloads/dsa\ project/project/Snake_game/GUI/BoardWidget.h

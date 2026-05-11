@@ -54,3 +54,12 @@ void Snake::setDirection(Position dir) {
 Position Snake::getDirection() const {
     return direction;
 }
+
+void Snake::setHead(Position newHead) {
+    if (!body.empty()) {
+        Position oldHead = body.front();
+        bodySet.erase(oldHead);
+        body.front() = newHead;
+        bodySet.insert(newHead);
+    }
+}

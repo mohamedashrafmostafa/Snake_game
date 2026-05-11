@@ -298,30 +298,6 @@ Core/PowerUp.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\SnakePlusPlus.dir\build.make CMakeFiles/SnakePlusPlus.dir/Core/PowerUp.cpp.s
 .PHONY : Core/PowerUp.cpp.s
 
-Core/Utils.obj: Core/Utils.cpp.obj
-.PHONY : Core/Utils.obj
-
-# target to build an object file
-Core/Utils.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\SnakePlusPlus.dir\build.make CMakeFiles/SnakePlusPlus.dir/Core/Utils.cpp.obj
-.PHONY : Core/Utils.cpp.obj
-
-Core/Utils.i: Core/Utils.cpp.i
-.PHONY : Core/Utils.i
-
-# target to preprocess a source file
-Core/Utils.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\SnakePlusPlus.dir\build.make CMakeFiles/SnakePlusPlus.dir/Core/Utils.cpp.i
-.PHONY : Core/Utils.cpp.i
-
-Core/Utils.s: Core/Utils.cpp.s
-.PHONY : Core/Utils.s
-
-# target to generate assembly for a file
-Core/Utils.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\SnakePlusPlus.dir\build.make CMakeFiles/SnakePlusPlus.dir/Core/Utils.cpp.s
-.PHONY : Core/Utils.cpp.s
-
 Core/snake.obj: Core/snake.cpp.obj
 .PHONY : Core/snake.obj
 
@@ -471,9 +447,6 @@ help:
 	@echo ... Core/PowerUp.obj
 	@echo ... Core/PowerUp.i
 	@echo ... Core/PowerUp.s
-	@echo ... Core/Utils.obj
-	@echo ... Core/Utils.i
-	@echo ... Core/Utils.s
 	@echo ... Core/snake.obj
 	@echo ... Core/snake.i
 	@echo ... Core/snake.s

@@ -6,12 +6,15 @@
 #include <QKeyEvent>
 #include <QGraphicsDropShadowEffect>
 #include <QShortcut>
+#include <QStackedWidget>
+#include <QLabel>
+#include <QPushButton>
+#include <QLineEdit>
+#include <QComboBox>
+#include <QCheckBox>
+#include <QTableWidget>
 #include "../Core/Game.h"
 #include "BoardWidget.h"
-
-QT_BEGIN_NAMESPACE
-namespace Ui { class MainWindow; }
-QT_END_NAMESPACE
 
 class MainWindow : public QMainWindow {
     Q_OBJECT
@@ -24,33 +27,82 @@ protected:
     void keyPressEvent(QKeyEvent *event) override;
 
 private slots:
-    void on_btnStart_clicked();
-    void on_btnLeaderboard_clicked();
-    void on_btnQuit_clicked();
-    void on_btnPause_clicked();
-    void on_btnMenuFromGame_clicked();
-    void on_btnPlayAgain_clicked();
-    void on_btnBackToMenu_clicked();
-    
     void gameTick();
     void onTimeTick();
     void handleDirectionInput(InputKey key);
 
 private:
-    Ui::MainWindow *ui;
+    // ── Core ──────────────────────────────────────
     Game game;
     QTimer *gameTimer;
     QTimer *timeTimer;
     int secondsElapsed;
-    BoardWidget *m_boardWidget;
 
-    void setupBoardUI();
-    void setupStyles();
+    // ── UI Pages (QStackedWidget) ─────────────────
+    QStackedWidget *stackedWidget;
+
+    // Page 0: Main Menu
+    QWidget    *pagMenu;
+    QLabel     *lblTitle;
+    QLabel     *lblSubtitle;
+    QLineEdit  *inputPlayerName;
+    QComboBox  *comboDifficulty;
+    QCheckBox  *chkWallWrap;
+    QPushButton *btnStart;
+    QPushButton *btnLeaderboard;
+    QPushButton *btnInstructions;
+    QPushButton *btnQuit;
+
+    // Page 1: Game
+    QWidget     *pagGame;
+    BoardWidget *m_boardWidget;
+    QLabel      *lblScoreValue;
+    QLabel      *lblLevelValue;
+    QLabel      *lblLengthValue;
+    QLabel      *lblSpeedValue;
+    QLabel      *lblPowerUpValue;
+    QLabel      *lblTimer;
+    QLabel      *lblControls;
+    QPushButton *btnPause;
+    QPushButton *btnMenuFromGame;
+
+    // Page 2: Game Over
+    QWidget    *pagGameOver;
+    QLabel     *lblGameOver;
+    QLabel     *lblFinalScore;
+    QLabel     *lblFinalLength;
+    QLabel     *lblFinalLevel;
+    QLabel     *lblFinalTime;
+    QLineEdit  *inputGameOverName;
+    QPushButton *btnSaveScore;
+    QPushButton *btnPlayAgain;
+    QPushButton *btnViewLeaderboard;
+    QPushButton *btnBackToMenuFromGO;
+
+    // Page 3: Leaderboard
+    QWidget      *pagLeaderboard;
+    QTableWidget *tableLeaderboard;
+    QPushButton  *btnLeaderboardBack;
+
+    // Page 4: Instructions
+    QWidget    *pagInstructions;
+    QPushButton *btnInstructionsBack;
+
+    // ── Setup methods ─────────────────────────────
+    void buildMenuPage();
+    void buildGamePage();
+    void buildGameOverPage();
+    void buildLeaderboardPage();
+    void buildInstructionsPage();
     void setupShortcuts();
+    QString globalStyleSheet();
+
+    // ── Runtime methods ───────────────────────────
     void updateBoardDisplay();
     void updateHUD();
     void showGameOverScreen();
     void refreshLeaderboardUI();
+    QString generateIconBase64(const QString& type);
 };
 
 #endif // MAINWINDOW_H
