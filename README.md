@@ -67,19 +67,104 @@ Or download it directly from GitHub:
 
 ---
 
-## 🚀 How to Compile and Run
+## 📋 Prerequisites
 
-To compile and execute the game from the terminal, ensure you have a standard C++ compiler (like `g++`) installed.
+Before building, make sure you have:
 
-1. **Navigate to the project directory:**
-   ```bash
-   cd Snake_game
-   ```
+- [Qt6](https://www.qt.io/download-qt-installer) installed (includes MinGW, CMake, and Ninja)
+- CMake 3.20+ *(bundled with Qt — no separate install needed)*
 
-2. **Compile the source files:**
-   ```bash
-   g++ main.cpp Game.cpp Snake.cpp Board.cpp Food.cpp Leaderboard.cpp PowerUp.cpp InputHandler.cpp Utils.cpp -o snake_game
-   ```
+---
+
+## 🔧 Build Instructions
+
+### Step 1 — Find your Qt installation path
+
+After installing Qt, locate your install directory. It typically looks like:
+
+```
+C:\Qt\
+D:\Qt\
+```
+
+You will need to know:
+- Your **Qt version** (e.g. `6.8.3`)
+- Your **Qt install root** (e.g. `C:\Qt`)
+
+> **Tip:** Open Qt Maintenance Tool — the path shown at the top is your install root.
+
+---
+
+### Step 2 — Configure the project
+
+Open **Command Prompt** in the project root folder and run the command below.  
+Replace `<QT_PATH>` with your Qt install root and `<QT_VERSION>` with your version:
+
+```cmd
+cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_TOOLCHAIN_FILE="<QT_PATH>\<QT_VERSION>\mingw_64\lib\cmake\Qt6\qt.toolchain.cmake" -DCMAKE_C_COMPILER="<QT_PATH>\Tools\mingw1310_64\bin\gcc.exe" -DCMAKE_CXX_COMPILER="<QT_PATH>\Tools\mingw1310_64\bin\g++.exe" -S . -B build -G "MinGW Makefiles"
+```
+
+**Example** — if Qt is installed at `C:\Qt\6.8.3`:
+
+```cmd
+cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_TOOLCHAIN_FILE="C:\Qt\6.8.3\mingw_64\lib\cmake\Qt6\qt.toolchain.cmake" -DCMAKE_C_COMPILER="C:\Qt\Tools\mingw1310_64\bin\gcc.exe" -DCMAKE_CXX_COMPILER="C:\Qt\Tools\mingw1310_64\bin\g++.exe" -S . -B build -G "MinGW Makefiles"
+```
+
+---
+
+### Step 3 — Build
+
+```cmd
+cmake --build build
+```
+
+---
+
+### Step 4 — Deploy Qt DLLs
+
+The `.exe` needs Qt DLLs to run. Deploy them with `windeployqt`:
+
+```cmd
+<QT_PATH>\<QT_VERSION>\mingw_64\bin\windeployqt.exe build\SnakePlusPlus.exe
+```
+
+**Example:**
+
+```cmd
+C:\Qt\6.8.3\mingw_64\bin\windeployqt.exe build\SnakePlusPlus.exe
+```
+
+> This copies all required Qt DLLs next to your executable automatically.
+
+---
+
+### Step 5 — Run
+
+```cmd
+build\SnakePlusPlus.exe
+```
+
+---
+
+## 🛠️ Alternative — Qt Creator (No terminal needed)
+
+1. Open **Qt Creator** → `File > Open File or Project`
+2. Select `CMakeLists.txt`
+3. Choose a **Qt6 MinGW kit** when prompted
+4. Press **Build** (`Ctrl+B`) then **Run** (`Ctrl+R`)
+
+Qt Creator handles all paths and DLL deployment automatically.
+
+---
+
+## ❓ Troubleshooting
+
+| Error | Fix |
+|---|---|
+| `Could not find Qt6` | Double-check `<QT_PATH>` and `<QT_VERSION>` in the cmake command |
+| `gcc.exe not found` | Verify MinGW is inside `<QT_PATH>\Tools\mingw1310_64\bin\` |
+| `.exe crashes on launch` | Run `windeployqt` (Step 4) — missing DLLs |
+| `CMakeLists.txt not found` | Make sure you're running the command from the **project root**, not inside `build\` |
 
 ## 🤖 AI Usage Declaration
 
