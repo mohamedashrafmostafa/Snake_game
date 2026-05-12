@@ -8,7 +8,6 @@
 #include "Food.h"
 #include "Leaderboard.h"
 #include "PowerUp.h"
-#include "Move.h"
 #include "Position.h"
 #include "InputHandler.h"
 
@@ -26,7 +25,6 @@ private:
 
     // ── Data structures ──────────────────────────
     std::vector<PowerUp> activePowerUps;   // vector so we can iterate + erase easily
-    std::stack<Move>     moveHistory;      // Stack for undo feature
 
     // ── Direction (Snake::setDirection is commented out by Member 1) ──
     // We track direction here until Member 1 uncomments setDirection/getDirection

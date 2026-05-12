@@ -24,7 +24,6 @@ Core/InputHandler.cpp
 Core/InputHandler.h
 Core/Leaderboard.cpp
 Core/Leaderboard.h
-Core/Move.h
 Core/Position.h
 
 

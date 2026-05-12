@@ -60,7 +60,6 @@ void Game::resetGame() {
     // NOTE: wallWrap and currentDifficulty are preserved — set before resetGame()
 
     activePowerUps.clear();
-    while (!moveHistory.empty()) moveHistory.pop();
 
     // Ensure obstacles are placed based on currentDifficulty before spawning food
     setDifficulty(currentDifficulty);
@@ -76,13 +75,6 @@ void Game::resetGame() {
 void Game::tick() {
     if (paused || gameOver) return;
 
-    // Save state BEFORE moving (for undo)
-    Move currentMove;
-    currentMove.previousTail      = snake.getBody().back();
-    currentMove.previousDirection = currentDirection;
-    currentMove.ateFood           = false;
-    currentMove.earnedPoints      = 0;
-
     // Self-collision check BEFORE move() because Member 1's
     // checkSelfCollision() looks ahead at where the snake WILL move
     if (snake.checkSelfCollision()) {
@@ -92,7 +84,6 @@ void Game::tick() {
 
     snake.move();
 
-    // ── Wall Wrap / Invincibility: teleport head to opposite side ────
     if (wallWrap || invincible) {
         Position head = snake.getHead();
         bool wrapped = false;
@@ -109,10 +100,7 @@ void Game::tick() {
 
     checkCollisions();
 
-    currentMove.ateFood      = lastMoveAteFood;
-    currentMove.earnedPoints = lastEarnedPoints;
     lastEarnedPoints         = 0;  // reset for next tick
-    moveHistory.push(currentMove);
 
     // Spawn a power-up every POWERUP_SPAWN_INTERVAL foods
     if (lastMoveAteFood) {

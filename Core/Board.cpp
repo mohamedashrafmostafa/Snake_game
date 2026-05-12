@@ -14,10 +14,6 @@ void Board::clear() {
     obstacles.clear();
 }
 
-void Board::render(const Snake& snake, const Food& food) {
-    // Console rendering (if needed by console mode). 
-    // The GUI mode relies on getters, so this isn't strictly needed for Qt.
-}
 
 bool Board::isObstacle(Position pos) const {
     // O(1) unordered_set lookup
@@ -30,8 +26,4 @@ void Board::addObstacle(Position pos) {
 
 bool Board::isInsideBoard(Position pos) const {
     return pos.x >= 0 && pos.x < width && pos.y >= 0 && pos.y < height;
-}
-
-void Board::loadMapFromFile(std::string filename) {
-    // Optional feature for loading maps from text files
 }
