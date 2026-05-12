@@ -1,14 +1,12 @@
 #pragma once
 #include <map>
-#include <vector>       // ADDED: needed for vector<string>
+#include <vector>
 #include <string>
-#include <functional>   // ADDED: needed for greater<int>
+#include <functional>
 
 class Leaderboard {
 private:
-    // std::map is a BST — sorted descending by score (greater<int>)
-    // vector<string> handles duplicate scores without overwriting
-    std::map<int, std::vector<std::string>, std::greater<int>> scores; // FIXED: was map<int, string>
+    std::map<int, std::vector<std::string>, std::greater<int>> scores;
 
 public:
     const std::map<int, std::vector<std::string>, std::greater<int>>& getScores() const { return scores; }

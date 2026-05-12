@@ -1,5 +1,5 @@
 #pragma once
-#include <vector>   // explicit — needed for std::vector<PowerUp>
+#include <vector>
 #include <stack>
 #include <string>
 #include <unordered_set>
@@ -13,47 +13,37 @@
 
 class Game {
 public:
-    // Expose enum for difficulty if needed
     enum Difficulty { EASY = 1, MEDIUM = 2, HARD = 3 };
 
 private:
-    // ── Core components ──────────────────────────
     Snake       snake;
     Board       board;
     Leaderboard leaderboard;
     Food        food;
 
-    // ── Data structures ──────────────────────────
-    std::vector<PowerUp> activePowerUps;   // vector so we can iterate + erase easily
+    std::vector<PowerUp> activePowerUps;
 
-    // ── Direction (Snake::setDirection is commented out by Member 1) ──
-    // We track direction here until Member 1 uncomments setDirection/getDirection
     Position currentDirection;
 
-    // ── Game state ───────────────────────────────
     int  score;
     int  currentLevel;
     bool gameOver;
     bool paused;
 
-    // ── Power-up state ───────────────────────────
     int  tickMs;
     int  scoreMultiplier;
     bool invincible;
     int  powerUpTicksLeft;
 
-    // ── Internal flags ────────────────────────────
     bool lastMoveAteFood;
-    int  lastEarnedPoints;   // exact points earned this tick (used by undo)
+    int  lastEarnedPoints;
 
-    // ── Settings ─────────────────────────────────
-    bool wallWrap;           // Wall Wrap Mode: snake wraps instead of dying at walls
-    int  currentDifficulty;  // Store current difficulty level
-    int  foodEatenCount;     // Moved from static local in tick() for proper reset
+    bool wallWrap;
+    int  currentDifficulty;
+    int  foodEatenCount;
 
-    // ── Private helpers ──────────────────────────
     void tickPowerUps();
-    void spawnPowerUp();     // ADDED: was missing — spawns a power-up on the board
+    void spawnPowerUp();
 
 public:
     Game();
@@ -63,18 +53,15 @@ public:
     void applyPowerUp(PowerUpType type);
     void saveCurrentScore(std::string playerName);
 
-    // ── Added for GUI Integration ──────────────────
     void resetGame();
     void tick();
     void processInputGUI(InputKey key);
     void setDifficulty(int diff);
     void setPaused(bool p) { paused = p; }
 
-    // ── Wall Wrap Mode ─────────────────────────────
     void setWallWrap(bool enabled) { wallWrap = enabled; }
     bool isWallWrap() const { return wallWrap; }
 
-    // ── Getters for GUI ────────────────────────────
     const Snake& getSnake() const { return snake; }
     const Board& getBoard() const { return board; }
     const Food& getFood() const { return food; }
@@ -85,7 +72,6 @@ public:
     bool isGameOver() const { return gameOver; }
     bool isPaused() const { return paused; }
 
-    // ── Power-up / difficulty state for HUD ────────
     const std::vector<PowerUp>& getActivePowerUps() const { return activePowerUps; }
     int  getDifficulty() const { return currentDifficulty; }
     bool isInvincible() const { return invincible; }

@@ -3,8 +3,6 @@
 #include <sstream>
 
 
-// push_back appends the name.  Ties are stored together, never dropped.
-
 void Leaderboard::addScore(std::string name, int score) {
     scores[score].push_back(name);
 }

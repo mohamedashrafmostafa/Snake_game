@@ -3,20 +3,14 @@
 #include <ctime>
 #include <vector>
 
-// ─────────────────────────────────────────────
-//  Constants
-// ─────────────────────────────────────────────
 static const int BOARD_WIDTH            = 20;
 static const int BOARD_HEIGHT           = 20;
 static const int BASE_TICK_MS           = 150;
 static const int FAST_TICK_MS           = 80;
 static const int SCORE_MULTIPLIER_VAL   = 2;
 static const int POWERUP_DURATION_TICKS = 30;
-static const int POWERUP_SPAWN_INTERVAL = 5;   // spawn a power-up every N foods eaten
+static const int POWERUP_SPAWN_INTERVAL = 5;
 
-// ─────────────────────────────────────────────
-//  Constructor
-// ─────────────────────────────────────────────
 Game::Game()
     : snake(),
       board(BOARD_WIDTH, BOARD_HEIGHT),
@@ -38,9 +32,7 @@ Game::Game()
 {
     srand(static_cast<unsigned int>(time(nullptr)));
 }
-// ─────────────────────────────────────────────
-//  resetGame()
-// ─────────────────────────────────────────────
+
 void Game::resetGame() {
     snake            = Snake();
     currentDirection = {1, 0};
@@ -55,13 +47,9 @@ void Game::resetGame() {
     powerUpTicksLeft = 0;
     lastMoveAteFood  = false;
     lastEarnedPoints = 0;
-    foodEatenCount   = 0;       // FIX: was static in tick(), now properly reset
-
-    // NOTE: wallWrap and currentDifficulty are preserved — set before resetGame()
+    foodEatenCount   = 0;
 
     activePowerUps.clear();
-
-    // Ensure obstacles are placed based on currentDifficulty before spawning food
     setDifficulty(currentDifficulty);
 
     spawnFood();
@@ -72,11 +60,22 @@ void Game::resetGame() {
 // ─────────────────────────────────────────────
 //  tick() — runs one logic frame (used by QTimer)
 // ─────────────────────────────────────────────
+// ─────────────────────────────────────────────
+// ─────────────────────────────────────────────
 void Game::tick() {
     if (paused || gameOver) return;
 
-    // Self-collision check BEFORE move() because Member 1's
-    // checkSelfCollision() looks ahead at where the snake WILL move
+    
+    if (snake.checkSelfCollision()) {
+        gameOver = true;
+        return;
+    }
+    
+    if (snake.checkSelfCollision()) {
+        gameOver = true;
+        return;
+    }
+    
     if (snake.checkSelfCollision()) {
         gameOver = true;
         return;
@@ -94,17 +93,17 @@ void Game::tick() {
         if (head.y >= BOARD_HEIGHT) { head.y = 0;               wrapped = true; }
 
         if (wrapped) {
-            snake.setHead(head);  // Update deque front + bodySet
+            snake.setHead(head);  
         }
     }
 
     checkCollisions();
 
-    lastEarnedPoints         = 0;  // reset for next tick
+    lastEarnedPoints         = 0;  
 
     // Spawn a power-up every POWERUP_SPAWN_INTERVAL foods
     if (lastMoveAteFood) {
-        foodEatenCount++;         // FIX: now a member variable, properly reset
+        foodEatenCount++;         
         if (foodEatenCount % POWERUP_SPAWN_INTERVAL == 0)
             spawnPowerUp();
     }
@@ -166,7 +165,7 @@ void Game::setDifficulty(int diff) {
     int rand_num_obstacles = 0;
     int rand_x = rand() % BOARD_WIDTH;
     int rand_y = rand() % BOARD_HEIGHT;
-    board.clear(); // Clear existing obstacles
+    board.clear(); 
     if (diff == Game::EASY) {
         tickMs = 200;
     } else if (diff == Game::MEDIUM) {
@@ -194,14 +193,12 @@ void Game::setDifficulty(int diff) {
 //  Key data structure: unordered_set for O(1) occupied-cell lookup
 // ─────────────────────────────────────────────
 void Game::spawnFood() {
-    // Collect all occupied positions (snake body + active power-up positions + obstacles)
     std::unordered_set<Position, PositionHash> occupied;
     for (const Position& p : snake.getBody())
         occupied.insert(p);
     for (const PowerUp& pu : activePowerUps)
         occupied.insert(pu.pos);
 
-    // FIX: also exclude obstacle positions so food never spawns on obstacles
     for (const Position& obs : board.getObstacles())
         occupied.insert(obs);
 
@@ -222,13 +219,13 @@ void Game::spawnFood() {
     food = Food(candidate, type);
 }
 
+
 // ─────────────────────────────────────────────
 //  spawnPowerUp()
 //  ADDED: was completely missing — this is what puts power-ups on the board.
 //  Called every POWERUP_SPAWN_INTERVAL foods eaten.
 // ─────────────────────────────────────────────
 void Game::spawnPowerUp() {
-    // Collect all occupied positions so we don't spawn on top of anything
     std::unordered_set<Position, PositionHash> occupied;
     for (const Position& p : snake.getBody())
         occupied.insert(p);
@@ -252,7 +249,7 @@ void Game::spawnPowerUp() {
     PowerUp pu;
     pu.pos            = candidate;
     pu.type           = chosenType;
-    pu.expirationTime = 0;  // not used for spawned power-ups (we erase on pickup)
+    pu.expirationTime = 0;  
 
     activePowerUps.push_back(pu);
 }
@@ -270,7 +267,7 @@ void Game::checkCollisions() {
         return;
     }
 
-    // 2. Obstacle collision (obstacles still kill even with wall wrap)
+   
     if (!invincible && board.isObstacle(head)) {
         gameOver = true;
         return;
@@ -281,8 +278,9 @@ void Game::checkCollisions() {
         int earned      = food.getPoints() * scoreMultiplier;
         score          += earned;
         lastMoveAteFood = true;
-        lastEarnedPoints = earned;  // save exact value for undo
+        lastEarnedPoints = earned;  
 
+        if (food.getType() == FoodType::SPEED_UP) {
         if (food.getType() == FoodType::SPEED_UP) {
             tickMs           = FAST_TICK_MS;
             powerUpTicksLeft = POWERUP_DURATION_TICKS;
@@ -290,26 +288,25 @@ void Game::checkCollisions() {
 
         snake.grow();
         spawnFood();
+    spawnFood();
 
         currentLevel = (score / 50) + 1;
         return;
     }
 
-    // 4. Power-up collision — iterate vector, erase on hit
+    // 4. Power-up collision — iterate vector, erase on hitrate vector, erase on hit
     for (auto it = activePowerUps.begin(); it != activePowerUps.end(); ) {
         if (head == it->pos) {
             applyPowerUp(it->type);
-            it = activePowerUps.erase(it);  // erase returns next valid iterator
-            break;                          // only one power-up eaten per tick
+            it = activePowerUps.erase(it);  
+            break;                         
         } else {
             ++it;
         }
     }
 }
+}
 
-// ─────────────────────────────────────────────
-//  applyPowerUp()
-// ─────────────────────────────────────────────
 void Game::applyPowerUp(PowerUpType type) {
     powerUpTicksLeft = POWERUP_DURATION_TICKS;
 

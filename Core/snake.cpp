@@ -1,6 +1,6 @@
 #include "snake.h"
 Snake::Snake () {
-    direction={1,0};//4 values: left,right,up,down
+    direction={1,0};
     body.push_front(direction);  
 }
 int bSize;
@@ -9,14 +9,13 @@ Position currhead=body.front();
 Position newHead;
 newHead.x=direction.x+currhead.x;
 newHead.y=direction.y+currhead.y;
-body.push_front(newHead);//add to queue
-bodySet.insert(newHead);// add to unordered set(to see if it's already there or not LATER:) )
+body.push_front(newHead);
+bodySet.insert(newHead);
 Position oldTail= body.back();
-bodySet.erase(oldTail);//remove rear position from the set
-body.pop_back();//remove Position from deque
+bodySet.erase(oldTail);
+body.pop_back();
 }
 void Snake:: grow(){
-//if the snake eats
 Position currhead=body.front();
 Position newHead;
 newHead.x=direction.x+currhead.x;
@@ -30,8 +29,7 @@ bool Snake::checkSelfCollision() const{
 Position newHead;
 newHead.x=direction.x+currhead.x;
 newHead.y=direction.y+currhead.y;
-if (bodySet.count(newHead)){// count:unordered set's method checks if it contains specific value
-    // The deque will have 2 same positions into it -> Game ends
+if (bodySet.count(newHead)){
     return true;
 }
 else{
