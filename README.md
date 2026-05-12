@@ -71,7 +71,7 @@ Or download it directly from GitHub:
 
 Before building, make sure you have:
 
-- [Qt6](https://www.qt.io/download-qt-installer) installed (includes MinGW, CMake, and Ninja)
+- [Qt6](https://www.qt.io/download-qt-installer) installed (includes MinGW and CMake)
 - CMake 3.20+ *(bundled with Qt — no separate install needed)*
 
 ---
