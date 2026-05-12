@@ -37,4 +37,4 @@ GUI/BoardWidget.h
 set_target_properties(SnakePlusPlus PROPERTIES
     WIN32_EXECUTABLE TRUE
 )
-target_link_libraries(SnakePlusPlus PRIVATE Qt6::Widgets)
+target_link_libraries(SnakePlusPlus PRIVATE Qt6::Widgets )
