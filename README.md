@@ -51,3 +51,15 @@ To compile and execute the game from the terminal, ensure you have a standard C+
    ```bash
    g++ main.cpp Game.cpp Snake.cpp Board.cpp Food.cpp Leaderboard.cpp PowerUp.cpp InputHandler.cpp Utils.cpp -o snake_game
    ```
+
+ 
+## 👥 Team Members
+ 
+| # | Name |
+|---|------|
+| 1 | Mohamed Ashraf 
+| 2 | Omar Morshed 
+| 3 | Yahia Nabil 
+| 4 | Amr Emad 
+| 5 | Ahmed ELmarsfay 
+
