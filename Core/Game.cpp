@@ -281,14 +281,13 @@ void Game::checkCollisions() {
         lastEarnedPoints = earned;  
 
         if (food.getType() == FoodType::SPEED_UP) {
-        if (food.getType() == FoodType::SPEED_UP) {
             tickMs           = FAST_TICK_MS;
             powerUpTicksLeft = POWERUP_DURATION_TICKS;
         }
 
         snake.grow();
+
         spawnFood();
-    spawnFood();
 
         currentLevel = (score / 50) + 1;
         return;
@@ -305,7 +304,7 @@ void Game::checkCollisions() {
         }
     }
 }
-}
+
 
 void Game::applyPowerUp(PowerUpType type) {
     powerUpTicksLeft = POWERUP_DURATION_TICKS;
