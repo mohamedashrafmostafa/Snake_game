@@ -11,7 +11,7 @@
 
 | # | Name | Student ID |
 |---|------|------------|
-| 1 |Mohamed ashraf|2300475|
+| 1 |Mohamed Ashraf|2300475|
 | 2 |omar Ahmed |2300131 |
 | 3 |yahia Mohamed|2300644|
 | 4 |Amr Emad|2300379|
